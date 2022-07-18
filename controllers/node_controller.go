@@ -62,8 +62,6 @@ type NodeReconciler struct {
 func (r *NodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := log.FromContext(ctx)
 
-	// TODO(user): your logic here
-
 	// Fetch the Node from the Kubernetes API.
 
 	var node corev1.Node
@@ -77,19 +75,19 @@ func (r *NodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		return ctrl.Result{}, err
 	}
 
-	// holds name of a node's operating system with space character removed (space not allowed in labels).
+	// Holds name of a node's operating system with space character removed (space not allowed in labels).
 	nodeOS := strings.ToLower(strings.ReplaceAll(node.Status.NodeInfo.OSImage, " ", ""))
 
 	labelIsPresent := node.Labels[fmt.Sprintf(addOSLabel, nodeOS)] == trueValue
 
 	if labelIsPresent {
-		// The desired state and actual state of the Pod are the same.
+		// The desired state and actual state of the Node are the same.
 		// No further action is required by the operator at this moment.
 		logger.Info("no update required")
 		return ctrl.Result{}, nil
 	}
 
-	// If the label should be set but is not, set it.
+	// Set the label for the Node.
 	if node.Labels == nil {
 		node.Labels = make(map[string]string)
 	}
