@@ -1,0 +1,15 @@
+domain: akay
+layout:
+- go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: node-label-controller
+repo: github.com/ehmad-kamal-99/node-label-controller
+resources:
+- controller: true
+  group: core
+  kind: Node
+  path: k8s.io/api/core/v1
+  version: v1
+version: "3"
