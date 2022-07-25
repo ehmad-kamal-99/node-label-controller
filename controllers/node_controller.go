@@ -30,14 +30,6 @@ import (
 )
 
 const (
-	addUbuntuLabelAnnotation  = "k8c.io/uses-ubuntu"
-	addCentOSLabelAnnotation  = "k8c.io/uses-centos"
-	addFlatCarLabelAnnotation = "k8c.io/uses-flatcar"
-	addFedoraLabelAnnotation  = "k8c.io/uses-fedora"
-	addRHELLabelAnnotation    = "k8c.io/uses-rhel"
-)
-
-const (
 	addOSLabel = "k8c.io/uses-%s"
 	trueValue  = "true"
 )
@@ -48,7 +40,7 @@ type NodeReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=core,resources=nodes,verbs=get;list;watch;update;patch
+//+kubebuilder:rbac:groups=core,resources=nodes,verbs=get;update;watch;list
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
